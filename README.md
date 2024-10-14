@@ -10,6 +10,12 @@ class StockPortfolio:
         self.api_key = api_key
         self.portfolio = pd.DataFrame(columns=['Ticker', 'Shares', 'Buy Price'])
 
+        self.portfolio = pd.DataFrame()  # Your existing portfolio
+        new_stock = pd.DataFrame()  # Your new stock DataFrame
+
+        new_stock_filtered = new_stock.dropna(axis=1, how='all')
+        self.portfolio = pd.concat([self.portfolio, new_stock_filtered], ignore_index=True)
+
     def add_stock(self, ticker, shares, buy_price):
         """Add a stock to the portfolio."""
         new_stock = pd.DataFrame({'Ticker': [ticker], 'Shares': [shares], 'Buy Price': [buy_price]})
